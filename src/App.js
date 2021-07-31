@@ -11,13 +11,11 @@ function App() {
       <BrowserRouter>
           <Switch>
             <Route path='/login' component={LoginComponant} exact/>
-            <PrivateRoute path="/Product/" component={DashboardComponant} />
+            <PrivateRoute path="/product/" component={DashboardComponant} />
           </Switch>
-          {AuthService.isLoggedIn() ?
-              <Redirect to={{ pathname: '/product' }} />
-              :
+          {!AuthService.isLoggedIn() &&
               <Redirect to={{pathname: 'login'}}/>
-            }
+          }
       </BrowserRouter>
   );
 }

@@ -3,7 +3,12 @@ import http from "../Util/Http"
 class AuthService{
 
     static isLoggedIn() {
-        return false
+        if(localStorage.getItem('token')){
+            return true
+        }else{
+            return false
+        }
+        
     }
 
     static async login(email,password){
@@ -17,6 +22,10 @@ class AuthService{
             console.log(error)
             return false;
         }
+    }
+
+    static logout(){
+        localStorage.removeItem('token');
     }
 
 }

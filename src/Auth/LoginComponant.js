@@ -1,18 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import AuthService from "./AuthService";
 
 function LoginComponant() {
+    const history = useHistory();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [errorMessage, seterrorMessage] = useState('')
+    const [errorMessage, setErrorMessage] = useState('')
+
+    useEffect(() => {
+        if(AuthService.isLoggedIn()){
+            history.push('/product')
+        }
+    }, [])
 
     const login = async (e) => {
         e.preventDefault();
+        setErrorMessage('');
         let response = await AuthService.login(email,password)
         if(response){
-
+            history.push('/product')
         }else{
-            seterrorMessage('Login Failed')
+            setErrorMessage('Login Failed')
         }
     }
 
