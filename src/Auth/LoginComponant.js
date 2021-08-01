@@ -28,27 +28,35 @@ function LoginComponant() {
     return(
         <div className="container">
             <div className="row justify-content-center">
-                <div className="col-md-4">
-                    {errorMessage!=="" &&
-                    <div className="alert alert-danger">
-                        {errorMessage}
-                    </div>
-                    }
-                    
-                    <form onSubmit={login}>
-                        <div className="form-group">
-                            <label>Email address</label>
-                            <input type="email" onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Enter email" required/>
+                <div className="col-md-4 mt-5">
+                    <div className="card">
+                        <div className="card-header">
+                            Login
                         </div>
-                        <div className="form-group">
-                            <label>Password</label>
-                            <input type="password" onChange={(e) => setPassword(e.target.value)} className="form-control"  placeholder="Password" required/>
-                        </div>
-                        <div className="form-check">
+                        <div className="card-body">
+                        {errorMessage!=="" &&
+                            <div className="alert alert-danger">
+                                {errorMessage}
+                            </div>
+                            }
                             
+                            <form onSubmit={login}>
+                                <div className="form-group">
+                                    <label>Email address</label>
+                                    <input type="email" onChange={(e) => setEmail(e.target.value)} className="form-control" placeholder="Enter email" required/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Password</label>
+                                    <input type="password" onChange={(e) => setPassword(e.target.value)} className="form-control"  placeholder="Password" required/>
+                                </div>
+                                <div className="form-check">
+                                    
+                                </div>
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
+                    
                 </div>
             </div>
         </div>

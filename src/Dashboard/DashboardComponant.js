@@ -2,7 +2,7 @@ import { useState } from "react"
 import { BrowserRouter, Link, Route, Switch, useHistory } from "react-router-dom"
 import AuthService from "../Auth/AuthService"
 import ProductComponant from "../Products/ProductComponant"
-import ProductCreateComponant from "../Products/ProductCreateComponant";
+import ProductFormComponant from "../Products/ProductFormComponant";
 
 function DashboardComponant(){
 
@@ -14,12 +14,12 @@ function DashboardComponant(){
     }
 
     return (
-        <div class="container">
+        <div className="container">
             <div c>
 
             </div>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark p-2">
-                <Link to="/product" class="navbar-brand">Product App</Link>
+                <Link to="/product" className="navbar-brand">Product App</Link>
                     
                 <div className="collapse navbar-collapse">
                     <ul className="navbar-nav mr-auto">
@@ -30,7 +30,7 @@ function DashboardComponant(){
                             <Link to="/product/create" className="nav-link">Product Create</Link>
                         </li>
                         <li className="nav-item">
-                            <a class="nav-link" onClick={logout}>Logout</a>
+                            <a className="nav-link" style={{cursor:'pointer'}} onClick={logout}>Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -38,8 +38,8 @@ function DashboardComponant(){
 
             <div>
             <Switch>
-                <Route path='/product/create' component={ProductCreateComponant} exact/>
-                <Route path='/product/edit/:productId' component={ProductCreateComponant} exact/>
+                <Route path='/product/create' component={ProductFormComponant} exact/>
+                <Route path='/product/edit/:productId' component={ProductFormComponant} exact/>
                 <Route path='/product' component={ProductComponant} exact/>
             </Switch>
             </div>

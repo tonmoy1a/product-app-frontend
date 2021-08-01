@@ -12,11 +12,13 @@ class AuthService{
     }
 
     static async login(email,password){
+        // console.log(http.get(''));
+        
         try {
             let response = await http.post('/api/auth/login', {email:email, password:password});
 
             localStorage.setItem('token', response.data.access_token)
-            
+
             return true;
         } catch (error) {
             console.log(error)

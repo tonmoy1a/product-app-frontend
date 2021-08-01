@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import Moment from "react-moment";
+import { Link } from "react-router-dom";
 import Http from "../Util/Http"
+import ProductService from "./ProductService";
 
 function ProductComponant(){
 
@@ -11,17 +13,18 @@ function ProductComponant(){
     }, [])
 
     const getProducts = async() => {
-        try {
-            let getproducts = await Http.get('/api/product');
-            setProducts(getproducts.data);
-        } catch (error) {
-            
+        let getproducts = await ProductService.getProducts();
+
+        if(getproducts){
+            setProducts(getproducts);
         }
     }
 
     const deleteProduct = async (id) => {
-        try {
-            await Http.delete('/api/product/'+id);
+
+        let deleteProduct = await ProductService.deleteProduct(id);
+
+        if(deleteProduct){
             setProducts((prev) => {
                 let index = prev.findIndex(p => p.id===id)
                 if (index > -1) {
@@ -29,10 +32,7 @@ function ProductComponant(){
                 }
                 return [...prev];
             })
-        } catch (error) {
-            console.log(error)
         }
-        
     }
 
     return(
@@ -44,7 +44,7 @@ function ProductComponant(){
                     </div>
                     <div>
                     {products.length > 0 ?
-                    <table class="table">
+                    <table className="table">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
@@ -68,6 +68,7 @@ function ProductComponant(){
                                 <td>{val.price}</td>
                                 <td><Moment format="DD/MM/YYYY">{val.created_at}</Moment></td>
                                 <td>
+                                    <Link to={'product/edit/'+val.id} className="btn btn-primary btn-sm m-lg-1">Edit</Link> 
                                     <button className="btn btn-danger btn-sm" onClick={(e) => deleteProduct(val.id)}>DELETE</button>
                                 </td>
                             </tr>
